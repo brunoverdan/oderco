@@ -1,86 +1,82 @@
+# Pré-requisitos
+## Banco de Dados
+- Docker
+## PHP
+- Versão superior a 7.
+## Servidor
+nginx
 
-# Setup Docker Para Projetos Laravel
-[Assine a Academy, e Seja VIP!](https://academy.especializati.com.br)
-
-### Passo a passo
-Clone Repositório
-```sh
-git clone https://github.com/especializati/setup-docker-laravel.git
-```
-```sh
-cd setup-docker-laravel && git checkout production
-```
-```sh
-cd ..
-```
-
-
-Clone os Arquivos do Laravel
-```sh
-git clone https://github.com/laravel/laravel.git example-project
-```
+# Tecnologias Utilizadas 
+- nginx
+- Laravel
+- VS Code
+- Composer
+- Npm
+- Docker
+- Vue.js
+- Rest API com PHP
+- Postman
 
 
-Copie os arquivos docker-compose.yml, Dockerfile e o diretório docker/ para o seu projeto
-```sh
-cp -r setup-docker-laravel/* example-project/
-```
+# Intalação
+```bash
+git clone https://github.com/brunoverdan/oderco.git oderco
+cd oderco
+composer install
+mv .env.example .env
+php artisan key:generate
 
-
-Crie o Arquivo .env
-```sh
-cd example-project/
-cp .env.example .env
 ```
 
-
-Atualizar as variáveis de ambiente do arquivo .env
-```dosini
-APP_NAME=EspecializaTi
-APP_URL=http://localhost:8989
-
+##Configurar arquivo .env para os banco da dados
+```bash
 DB_CONNECTION=mysql
 DB_HOST=mysql
 DB_PORT=3306
-DB_DATABASE=nome_que_desejar_db
-DB_USERNAME=nome_usuario
-DB_PASSWORD=senha_bem_dificil
-
-CACHE_DRIVER=redis
-QUEUE_CONNECTION=redis
-SESSION_DRIVER=redis
-
-REDIS_HOST=redis
-REDIS_PASSWORD=null
-REDIS_PORT=6379
+DB_DATABASE=cotacaodb
+DB_USERNAME=root
+DB_PASSWORD=root
 ```
-
-
+##bash
+```bash
+php artisan migrate
+npm install
+npm run dev
+php artisan serv
+```
 Suba os containers do projeto
 ```sh
 docker-compose up -d
 ```
-
-
-Acessar o container
+##Teste com Postman
+##listar
 ```sh
-docker-compose exec project_x bash
+Get -> http://localhost:8000/cotacao 
 ```
-
-
-Instalar as dependências do projeto
+#Gravar
 ```sh
-composer install
+Post- >http://localhost:8000/cotacao [JSON]
+{
+    "uf" : "PR",
+    "porcentual_cotacao" : 2.95,
+    "valor_extra": 14.35,
+    "transportadora_id": 5
+}
 ```
-
-
-Gerar a key do projeto Laravel
+#executar Calculo
 ```sh
-php artisan key:generate
+Put -> http://localhost:8000/cotacao [JSON]
+{
+   "uf": "PR",
+   "valor_pedido": 600
+}
 ```
+##Acessar o Sistema
+#Browser
+http://localhost:8000/
 
+# Autor
 
-Acessar o projeto
-[http://localhost:8989](http://localhost:8989)
-# CotacaoOderco
-"# oderco" 
+Bruno Verdan
+
+# oderco
