@@ -151,14 +151,18 @@ class CotacaoController extends Controller
 
     public function calcular(Request $request)
     {
+
         //RECEBE REQUEST
         $uf = $request->uf;
         $valor_pedido = $request->valor_pedido;
 
+
+
         //LOCALIZA
         //$cotacoes = cotacao_frete::where('uf', $uf)->get();
+        if(isset($request)){
 
-        $cotacoes = DB::select("SELECT uf, transportadora_id, '$valor_pedido' as  valor_pedido,
+            $cotacoes = DB::select("SELECT uf, transportadora_id, '$valor_pedido' as  valor_pedido,
                         ($valor_pedido/100 * porcentual_cotacao) + valor_extra as valor_cotacao
                         FROM cotacaodb.cotacao_fretes
                         WHERE uf = '$uf'
@@ -166,18 +170,27 @@ class CotacaoController extends Controller
                         LIMIT 3
                         ");
 
+                if($cotacoes){
 
-        //APRESENTA
+                    return $cotacoes;
 
-        if($cotacoes){
+                }else{
 
-            return $cotacoes;
+                    return response()->json(['message' => 'Erro no Relatorio'], 500);
+
+                }
 
         }else{
 
-            return response()->json(['message' => 'Cotação não cadastrada o UF'], 500);
+            return response()->json(['message' => 'UF ou valor Pedido esta em branco'], 500);
 
         }
+
+
+
+        //APRESENTA
+
+
 
 
 

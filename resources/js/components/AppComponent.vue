@@ -84,8 +84,8 @@
                                 </thead>
                             <tbody>
 
-                        <tr v-for="calc of calcular" :key="calc.id">
-                            <th>Rank</th>
+                        <tr v-for="(calc, count) of calcular" :key="calc.id">
+                            <th>{{count}}</th>
                             <th>{{ calc.transportadora_id}}</th>
                             <th>{{ calc.valor_cotacao}}</th>
                         </tr>
@@ -139,6 +139,9 @@
 
         data(){
             return{
+                data: {
+                    count: 1,
+                },
                 cotacao:{
                     id: '',
                     uf: '',
@@ -172,6 +175,10 @@
         },
 
         methods:{
+
+            incrementCounter: function() {
+                this.count += 1;
+            },
 
             listar(){
                 Cotacao.listar().then(resposta => {
